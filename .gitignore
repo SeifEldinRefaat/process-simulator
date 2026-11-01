@@ -2,3 +2,5 @@
 out/
 *.class
 .idea
+*.pdf
+*.txt
