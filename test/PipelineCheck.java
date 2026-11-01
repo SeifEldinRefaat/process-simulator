@@ -4,7 +4,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-// Run with: java -cp <build dir> PipelineCheck
 public class PipelineCheck {
 
     static String output;
@@ -43,7 +42,6 @@ public class PipelineCheck {
         return Main.readRegister(index);
     }
 
-    // Compares every stage in every cycle with the table in the project description.
     static void checkPipelineTable() throws Exception {
         String[] program = new String[7];
         for (int i = 0; i < 7; ++i) {
@@ -78,7 +76,6 @@ public class PipelineCheck {
     public static void main(String[] args) throws Exception {
         checkPipelineTable();
 
-        // Every ALU operation, data hazards, R0, negative immediates, and memory.
         int cycles = run(
                 "ADDI R1 R0 12",
                 "ADDI R2 R1 -2",
@@ -103,7 +100,6 @@ public class PipelineCheck {
         }
         equal(Memory.toInt(Main.memory.ReadFromMemory(1025)), 22, "MEM[1025]");
 
-        // Backward branch, taken and not taken.
         run("ADDI R1 R0 3",
                 "ADDI R2 R0 0",
                 "ADDI R2 R2 5",
@@ -114,7 +110,6 @@ public class PipelineCheck {
         equal(reg(2), 15, "loop total");
         equal(reg(3), 7, "instruction after the loop");
 
-        // Jump flushes the instruction behind it.
         run("J 2", "ADDI R1 R0 1", "ADDI R2 R0 1");
         equal(reg(1), 0, "flushed instruction");
         equal(reg(2), 1, "jump target");
