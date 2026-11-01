@@ -1,0 +1,6 @@
+Team number:
+Team name:
+Package: 1 - Spicy Von Neumann Fillet with extra shifts
+
+Team members (name, ID, tutorial):
+-
